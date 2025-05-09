@@ -1,55 +1,41 @@
-# InfluxData 1.x Sandbox
+№1
+CPU LA, RAM, IOPS, inodes, FS - тк все это затрагивается при записи информации на диск.
+Так же следить за доступностью сервиса, а именно смотреть коды ответа
 
-***[InfluxDB 2.x is now available](https://portal.influxdata.com/downloads/) and available via [Docker Hub](https://hub.docker.com/_/influxdb).  
-InfluxDB 2.x includes a native user interface, batch-style task processing and more. [Get Started Here!](https://docs.influxdata.com/influxdb/v2.0/get-started/)***
+№2
+RAM - оперативная память
+inodes - служит для нумерации блоков на жестком диске
+CPUla - средняя загруженность процессора
+Чтобы понять насколько мы выполняем обязанности, можно посмотреть на показатели, которые мы получаем. % стабильной работы должен соответствовать SLA, + так же надо обращать внимание на критические значения, которые мы фиксировали для полного понимания что происходит в нашей системе.
 
-This repo is a quick way to get the entire 1.x TICK Stack spun up and working together. It uses [Docker](https://www.docker.com/) to spin up the full TICK stack in a connected 
-fashion. This is heavily tested on MacOS and should mostly work on Linux and Windows.
+№3
+sentry - бесплатное решение до 5к алертов в день
 
-To get started you need a running docker installation. If you don't have one, you can download Docker for [Mac](https://www.docker.com/docker-mac) or [Windows](https://www.docker.com/docker-windows), or follow the installation instructions for Docker CE for your [Linux distribution](https://docs.docker.com/engine/installation/#server).
+№4
+надо добавить так же 3хх ответы
 
-### Running
+№5
+push ++ Упрощение репликации данных в разные системы мониторинга или их резервные копии
+	более гибкая настройка отправки пакетов
+	UDP - это мене затратный способ передачи данных, из-за чего может возрасти производительность сбора метрик, но этот 	протокол не обеспечивают гарантию доставки пакетов
 
-To run the `sandbox`, simply use the convenient cli:
+pull ++ Легче контролировать подлинность данных
+	можно настроить единый proxy server до всех агентов TLS
+	упрощенная отладка получения данных с агентов
 
-```bash
-$ ./sandbox
-sandbox commands:
-  up           -> spin up the sandbox environment (add -nightly to grab the latest nightly builds of InfluxDB and Chronograf)
-  down         -> tear down the sandbox environment
-  restart      -> restart the sandbox
-  influxdb     -> attach to the influx cli
-  flux         -> attach to the flux REPL
+№6
+Prometheus - pull
+TICK - push
+Zabbix - push pull
+VictoriaMetrics - push
+Nagios - pull
 
-  enter (influxdb||kapacitor||chronograf||telegraf) -> enter the specified container
-  logs  (influxdb||kapacitor||chronograf||telegraf) -> stream logs for the specified container
 
-  delete-data  -> delete all data created by the TICK Stack
-  docker-clean -> stop and remove all running docker containers
-  rebuild-docs -> rebuild the documentation container to see updates
-```
+№7
+![](https://github.com/Hoaxlt/monitoring/blob/master/Screenshot_1.png)
 
-To get started just run `./sandbox up`. You browser will open two tabs:
+№8
+![](https://github.com/Hoaxlt/monitoring/blob/master/Screenshot_2.png)
 
-- `localhost:8888` - Chronograf's address. You will use this as a management UI for the full stack
-- `localhost:3010` - Documentation server. This contains a simple markdown server for tutorials and documentation.
-
-> NOTE: Make sure to stop any existing installations of `influxdb`, `kapacitor` or `chronograf`. If you have them running the Sandbox will run into port conflicts and fail to properly start. In this case stop the existing processes and run `./sandbox restart`. Also make sure you are **not** using _Docker Toolbox_.
-
-Once the Sandbox launches, you should see your dashboard appear in your browser:
-
-![Dashboard](./documentation/static/images/landing-page.png)
-
-You are ready to get started with the TICK Stack!
-
-Click the Host icon in the left navigation bar to see your host (named `telegraf-getting-started`) and its overall status.
-![Host List](./documentation/static/images/host-list.png)
-
-You can click on `system` hyperlink to see a pre-built dashboard visualizing the basic system stats for your
-host, then check out the tutorials at `http://localhost:3010/tutorials`.
-
-If you are using the nightly builds and want to get started with Flux, make sure you check out the [Getting Started with Flux](./documentation/static/tutorials/flux-getting-started.md) tutorial.
-
-> Note: see [influx-stress](https://github.com/influxdata/influx-stress) to create data for your Sandbox.
-
-![Dashboard](./documentation/static/images/sandbox-dashboard.png)
+№9
+![](https://github.com/Hoaxlt/monitoring/blob/master/Screenshot_3.png)
