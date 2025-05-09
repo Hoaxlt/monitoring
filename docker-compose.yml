@@ -1,4 +1,4 @@
-#version: '3'
+version: '3'
 services:
   influxdb:
     # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
@@ -7,6 +7,7 @@ services:
       dockerfile: ./${TYPE}/Dockerfile
       args:
         INFLUXDB_TAG: ${INFLUXDB_TAG}
+    privileged: true   
     image: "influxdb"
     volumes:
       # Mount for influxdb data directory
@@ -27,6 +28,7 @@ services:
       dockerfile: ./${TYPE}/Dockerfile
       args:
         TELEGRAF_TAG: ${TELEGRAF_TAG}
+    privileged: true   
     image: "telegraf"
     environment:
       HOSTNAME: "telegraf-getting-started"
